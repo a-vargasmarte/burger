@@ -1,10 +1,19 @@
-// *********************************************************************************
-// BURGER.JS - THIS FILE CONTAINS CONTAINS THE ORM AND INVOKES ITS FUNCTIONS
-// *********************************************************************************
+module.exports = function (sequelize, DataTypes) {
+    return sequelize.define("Burgers", {
+        burger_name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: {
+                    args: [1, 144],
+                    msg: "Can't be empty and must have less than 144 characters"
+                }
+            }
+        },
+        devoured: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        }
 
-// import orm.js
-const orm = require('../config/orm.js');
-
-console.log(orm);
-
-orm.selectAll();
+    });
+};
